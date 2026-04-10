@@ -103,7 +103,6 @@ class _LoginPageState extends State<LoginPage> {
           if (_loginFormKey.currentState?.validate() ?? false) {
             _loginFormKey.currentState?.save();
             bool result = await AuthService().login(username!, password!);
-            print(result);
 
             if (result) {
               ScaffoldMessenger.of(
