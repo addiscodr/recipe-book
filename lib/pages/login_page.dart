@@ -8,6 +8,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  GlobalKey<FormState> _loginFormKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: SafeArea(child: _buildUI(context)));
@@ -50,13 +52,29 @@ class _LoginPageState extends State<LoginPage> {
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.3,
       child: Form(
+        key: _loginFormKey,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextFormField(decoration: InputDecoration(hintText: "Username")),
-            TextFormField(decoration: InputDecoration(hintText: "Password")),
+            TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "Enter username";
+                }
+              },
+              decoration: InputDecoration(hintText: "Username"),
+            ),
+            TextFormField(
+              obscureText: true,
+              validator: (value) {
+                if (value == null || value.length < 5) {
+                  return "Enter a valid password";
+                }
+              },
+              decoration: InputDecoration(hintText: "Password"),
+            ),
             _loginButton(context),
           ],
         ),
@@ -68,7 +86,9 @@ class _LoginPageState extends State<LoginPage> {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.6,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          if (_loginFormKey.currentState?.validate() ?? false) {}
+        },
         child: const Text(
           "Login",
           style: TextStyle(color: Colors.black54, fontSize: 24),
