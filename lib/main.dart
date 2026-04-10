@@ -24,9 +24,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }
 
-// https://dummyjson.com/auth/login/
+// continue from 1:15:00

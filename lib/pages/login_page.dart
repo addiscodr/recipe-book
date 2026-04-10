@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_book/services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,7 +9,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  GlobalKey<FormState> _loginFormKey = GlobalKey();
+  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
+  String? username;
+  String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -59,19 +62,29 @@ class _LoginPageState extends State<LoginPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextFormField(
+              initialValue: "emilys",
+              onSaved: (value) {
+                username = value;
+              },
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Enter username";
                 }
+                return null;
               },
               decoration: InputDecoration(hintText: "Username"),
             ),
             TextFormField(
+              initialValue: "emilyspass",
+              onSaved: (value) {
+                password = value;
+              },
               obscureText: true,
               validator: (value) {
                 if (value == null || value.length < 5) {
                   return "Enter a valid password";
                 }
+                return null;
               },
               decoration: InputDecoration(hintText: "Password"),
             ),
@@ -86,8 +99,37 @@ class _LoginPageState extends State<LoginPage> {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.6,
       child: ElevatedButton(
-        onPressed: () {
-          if (_loginFormKey.currentState?.validate() ?? false) {}
+        onPressed: () async {
+          if (_loginFormKey.currentState?.validate() ?? false) {
+            _loginFormKey.currentState?.save();
+            bool result = await AuthService().login(username!, password!);
+            print(result);
+
+            if (result) {
+              ScaffoldMessenger.of(
+                // ignore: use_build_context_synchronously
+                context,
+              ).showSnackBar(
+                const SnackBar(
+                  backgroundColor: Colors.green,
+                  content: Text(
+                    "Login Successful",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              );
+            } else {
+              ScaffoldMessenger.of(
+                // ignore: use_build_context_synchronously
+                context,
+              ).showSnackBar(
+                const SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text("Login Failed", style: TextStyle(fontSize: 18)),
+                ),
+              );
+            }
+          }
         },
         child: const Text(
           "Login",
