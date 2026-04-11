@@ -103,9 +103,10 @@ class _LoginPageState extends State<LoginPage> {
           if (_loginFormKey.currentState?.validate() ?? false) {
             _loginFormKey.currentState?.save();
             bool result = await AuthService().login(username!, password!);
-            print(result);
 
             if (result) {
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacementNamed(context, "/home");
               ScaffoldMessenger.of(
                 // ignore: use_build_context_synchronously
                 context,

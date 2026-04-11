@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_book/pages/home_page.dart';
 import 'package:recipe_book/pages/login_page.dart';
 
 void main() {
@@ -24,9 +25,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const LoginPage(),
+      initialRoute: "/login",
+      routes: {
+        "/login": (context) => LoginPage(),
+        "/home": (context) => HomePage(),
+      },
     );
   }
 }
 
-// continue from 1:15:00
+// continue from 1:25:00
