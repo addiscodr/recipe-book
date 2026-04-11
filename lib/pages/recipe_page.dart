@@ -82,7 +82,7 @@ class RecipePage extends StatelessWidget {
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
           ),
           Text(
-            "Rating: ${recipe.rating} ⭐ | Reviews: ${recipe.reviewCount}",
+            "Avg. Rating: ${recipe.rating} ⭐ | Reviews: ${recipe.reviewCount}",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
           ),
         ],

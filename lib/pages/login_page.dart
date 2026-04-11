@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
           "Book",
           style: TextStyle(
             fontSize: 36,
-            color: Colors.deepOrange,
+            color: Color.fromARGB(255, 129, 48, 19),
             fontWeight: FontWeight.w300,
           ),
         ),
@@ -88,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(hintText: "Password"),
             ),
+            SizedBox(height: 2),
             _loginButton(context),
           ],
         ),
@@ -97,8 +98,17 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _loginButton(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.6,
+      width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              12,
+            ), // Set your desired radius here
+          ),
+          minimumSize: const Size(150, 60),
+          backgroundColor: const Color.fromARGB(255, 129, 48, 19),
+        ),
         onPressed: () async {
           if (_loginFormKey.currentState?.validate() ?? false) {
             _loginFormKey.currentState?.save();
@@ -120,10 +130,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               );
             } else {
-              ScaffoldMessenger.of(
-                // ignore: use_build_context_synchronously
-                context,
-              ).showSnackBar(
+              // ignore: use_build_context_synchronously
+              ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   backgroundColor: Colors.red,
                   content: Text("Login Failed", style: TextStyle(fontSize: 18)),
@@ -134,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
         },
         child: const Text(
           "Login",
-          style: TextStyle(color: Colors.black54, fontSize: 24),
+          style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
     );

@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
               "Book",
               style: TextStyle(
                 fontSize: 36,
-                color: Colors.deepOrange,
+                color: Color.fromARGB(255, 129, 48, 19),
                 fontWeight: FontWeight.w300,
               ),
             ),
