@@ -30,11 +30,50 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: _buildUI(context),
+      body: SafeArea(child: _buildUI(context)),
     );
   }
 
   Widget _buildUI(BuildContext context) {
-    return Container();
+    return Container(child: Column(children: [_recipeTypeButtons(context)]));
+  }
+
+  Widget _recipeTypeButtons(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).height * 0.05,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: FilledButton(
+              onPressed: () {},
+              child: const Text("🥕 Snack"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: FilledButton(
+              onPressed: () {},
+              child: const Text("🍕 Breakfast"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: FilledButton(
+              onPressed: () {},
+              child: const Text("🍝 Lunch"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: FilledButton(
+              onPressed: () {},
+              child: const Text("🥗 Dinner"),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
