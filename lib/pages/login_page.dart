@@ -105,6 +105,8 @@ class _LoginPageState extends State<LoginPage> {
             bool result = await AuthService().login(username!, password!);
 
             if (result) {
+              // ignore: use_build_context_synchronously
+              Navigator.pushReplacementNamed(context, "/home");
               ScaffoldMessenger.of(
                 // ignore: use_build_context_synchronously
                 context,
