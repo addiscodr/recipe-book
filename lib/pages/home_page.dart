@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_book/models/recipe.dart';
-import 'package:recipe_book/pages/recipe_page.dart';
-import 'package:recipe_book/services/data_service.dart';
+import 'package:recipe_book/pages/login_page.dart';
+import '/models/recipe.dart';
+import '/pages/recipe_page.dart';
+import '/services/data_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,10 +14,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String _mealTypeFilter = "";
 
+  void logout() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: () => logout(),
+              child: Icon(Icons.logout_outlined),
+            ),
+          ),
+        ],
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
