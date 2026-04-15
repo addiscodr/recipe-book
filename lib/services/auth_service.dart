@@ -14,10 +14,10 @@ class AuthService {
 
   AuthService._internal();
 
-  Future<bool> login(String username, String password) async {
+  Future<bool> login(String email, String password) async {
     try {
       final response = await _httpService.post("auth/login", {
-        "username": username,
+        "email": email,
         "password": password,
       });
 
@@ -32,6 +32,29 @@ class AuthService {
       }
     } catch (e) {
       print("Login Error: $e");
+    }
+
+    return false;
+  }
+
+  Future<bool> signup(String email, String password) async {
+    try {
+      final response = await _httpService.post("auth/signup", {
+        "email": email,
+        "password": password,
+      });
+
+      if (response != null &&
+          response.statusCode == 200 &&
+          response.data != null) {
+        user = User.fromJson(response.data);
+        HttpService().setup(
+          bearerToken: user!.accessToken.isNotEmpty ? user!.accessToken : null,
+        );
+        return true;
+      }
+    } catch (e) {
+      print("Signup Error: $e");
     }
 
     return false;

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_book/pages/signup_page.dart';
+import 'package:recipe_book/pages/login_page.dart';
 import '/services/auth_service.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignupPageState extends State<SignupPage> {
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
   String? email;
   String? password;
+  String? confirmPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [_title(context), _loginForm(context)],
+        children: [_title(context), _signupForm(context)],
       ),
     );
   }
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _loginForm(BuildContext context) {
+  Widget _signupForm(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.9,
       height: MediaQuery.of(context).size.height * 0.3,
@@ -87,16 +88,30 @@ class _LoginPageState extends State<LoginPage> {
               },
               decoration: InputDecoration(hintText: "Password"),
             ),
+            SizedBox(height: 2),
+            TextFormField(
+              onSaved: (value) {
+                confirmPassword = value;
+              },
+              obscureText: true,
+              validator: (value) {
+                if (value == null || value.length < 5) {
+                  return "Passwords don't match";
+                }
+                return null;
+              },
+              decoration: InputDecoration(hintText: "Confirm Password"),
+            ),
             SizedBox(height: 20),
-            _loginButton(context),
-            _signupText(context),
+            _signupButton(context),
+            _signinText(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _loginButton(BuildContext context) {
+  Widget _signupButton(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
@@ -124,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SnackBar(
                   backgroundColor: Colors.green,
                   content: Text(
-                    "Login Successful",
+                    "Registration Successful",
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
@@ -135,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SnackBar(
                   backgroundColor: Colors.red,
                   content: Text(
-                    "Login Failed. Use Credentials Correctly.",
+                    "Registration Failed",
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
@@ -144,19 +159,19 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         child: const Text(
-          "Sign In",
+          "Register",
           style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
     );
   }
 
-  Widget _signupText(BuildContext context) {
+  Widget _signinText(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SignupPage()),
+          MaterialPageRoute(builder: (context) => LoginPage()),
         );
       },
       child: Container(
@@ -164,9 +179,9 @@ class _LoginPageState extends State<LoginPage> {
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text("Don't have an account? "),
+            Text("Already have an account? "),
             Text(
-              "Sign Up",
+              "Sign In",
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
             ),
           ],
