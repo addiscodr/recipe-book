@@ -11,7 +11,7 @@ class RecipePage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white60,
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 0.6),
         title: Row(
           children: [
             Text(
