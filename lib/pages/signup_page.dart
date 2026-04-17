@@ -49,9 +49,6 @@ class _SignupPageState extends State<SignupPage> {
           MaterialPageRoute(builder: (context) => HomePage()),
         );
       } on FirebaseAuthException catch (e) {
-        print("FIREBASE ERROR CODE: ${e.code}");
-        print("FIREBASE ERROR MESSAGE: ${e.message}");
-
         String message = "Something went wrong";
 
         if (e.code == "weak-password") {
@@ -60,7 +57,7 @@ class _SignupPageState extends State<SignupPage> {
           message = "Account Already Exists";
         } else if (e.code == "invalid-email") {
           message = "Invalid Email";
-        } else if (e.code == "network-request-falied") {
+        } else if (e.code == "network-request-failed") {
           message = "No Internet Connection";
         }
 

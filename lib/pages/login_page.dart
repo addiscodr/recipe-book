@@ -30,10 +30,7 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } on FirebaseAuthException catch (e) {
-      print("FIREBASE ERROR CODE: ${e.code}");
-      print("FIREBASE ERROR MESSAGE: ${e.message}");
-
-      String message = "";
+      String message = "Wrong Credentials";
 
       if (e.code == "user-not-found" && e.code == "wrong-password") {
         message = "Wrong Credentials";
