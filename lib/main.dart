@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_book/firebase_options.dart';
+import 'package:recipe_book/pages/signup_page.dart';
 import '/pages/home_page.dart';
 import '/pages/login_page.dart';
 
@@ -30,9 +31,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      initialRoute: "/login",
+      initialRoute: "/signup",
       routes: {
         "/login": (context) => LoginPage(),
+        "/signup": (context) => SignupPage(),
         "/home": (context) => HomePage(),
       },
     );
