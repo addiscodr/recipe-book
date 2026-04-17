@@ -1,16 +1,7 @@
-# recipe_book
+# Recipe Book
 
-A new Flutter project.
+### Description 
+This project is built using Flutter and TMDB API.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Click to view the demo
+[![Watch Demo](https://img.youtube.com/vi/I7bRNcajVos/0.jpg)](https://www.youtube.com/watch?v=I7bRNcajVos)
